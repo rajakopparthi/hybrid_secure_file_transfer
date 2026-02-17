@@ -1,0 +1,13 @@
+<div class="toast-container">
+    <div *ngFor="let toast of toasts$ | async" class="toast" [ngClass]="toast.type">
+        <div class="content">
+            <i class="fa-solid fa-check-circle" *ngIf="toast.type === 'success'"></i>
+            <i class="fa-solid fa-exclamation-circle" *ngIf="toast.type === 'error'"></i>
+            <i class="fa-solid fa-info-circle" *ngIf="toast.type === 'info'"></i>
+            <span>{{ toast.message }}</span>
+        </div>
+        <button class="close-btn" (click)="removeToast(toast.id!)">
+            <i class="fa-solid fa-times"></i>
+        </button>
+    </div>
+</div>

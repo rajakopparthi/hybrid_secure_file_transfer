@@ -1,0 +1,33 @@
+<div class="receive-container">
+    <div class="card glass-panel">
+        <h2 class="section-title">Receive Files</h2>
+        <p class="section-subtitle">Enter your file code and decryption key to access files.</p>
+
+        <div class="form-content">
+            <form [formGroup]="decryptForm" (ngSubmit)="onSubmit()">
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-barcode"></i> File Code / ID</label>
+                    <input type="text" formControlName="code" placeholder="Enter file code">
+                    <div class="error" *ngIf="decryptForm.get('code')?.touched && decryptForm.get('code')?.invalid">
+                        File code is required
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-key"></i> Decryption Key</label>
+                    <input type="password" formControlName="password" placeholder="Enter decryption key">
+                    <div class="error"
+                        *ngIf="decryptForm.get('password')?.touched && decryptForm.get('password')?.invalid">
+                        Decryption key is required
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" [disabled]="decryptForm.invalid">
+                    Decrypt & Download
+                </button>
+
+            </form>
+        </div>
+    </div>
+</div>

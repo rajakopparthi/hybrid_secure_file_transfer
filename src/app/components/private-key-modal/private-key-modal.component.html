@@ -1,0 +1,43 @@
+<div class="modal-overlay" *ngIf="isVisible" (click)="onCancel()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <i class="fa-solid fa-shield-halved header-icon"></i>
+            <h2>Enter Receiver Private Key</h2>
+            <p class="subtitle">Your private key is required to decrypt this file</p>
+        </div>
+
+        <div class="file-info">
+            <i class="fa-solid fa-file-lock"></i>
+            <span>{{ fileName }}</span>
+        </div>
+
+        <div class="key-input-section">
+            <label for="privateKey">
+                <i class="fa-solid fa-key"></i>
+                Receiver Private Key
+            </label>
+            <div class="input-wrapper">
+                <textarea id="privateKey" [(ngModel)]="privateKey" [class.masked]="!showKey"
+                    placeholder="Paste your RSA private key here..." class="key-input" rows="4"
+                    (keyup.enter)="onDecrypt()"></textarea>
+                <button class="toggle-visibility" (click)="toggleKeyVisibility()" type="button">
+                    <i class="fa-solid" [class.fa-eye]="!showKey" [class.fa-eye-slash]="showKey"></i>
+                </button>
+            </div>
+            <p class="help-text">
+                <i class="fa-solid fa-info-circle"></i>
+                Your private key never leaves your device and is only used for decryption
+            </p>
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn-decrypt" (click)="onDecrypt()" [disabled]="!privateKey.trim()">
+                <i class="fa-solid fa-unlock"></i>
+                Decrypt & Download
+            </button>
+            <button class="btn-cancel" (click)="onCancel()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

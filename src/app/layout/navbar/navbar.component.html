@@ -1,0 +1,21 @@
+<nav class="navbar glass-panel">
+    <div class="container nav-content">
+        <a routerLink="/" class="logo">
+            <i class="fa-solid fa-shield-halved"></i> HybridTransfer
+        </a>
+
+        <div class="nav-links">
+            <a (click)="handleNav('/')" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Send</a>
+            <a (click)="handleNav('/sent')" routerLinkActive="active">Sent</a>
+            <a (click)="handleNav('/inbox')" routerLinkActive="active">Inbox</a>
+            <a (click)="handleNav('/profile')" routerLinkActive="active" *ngIf="isLoggedIn()">
+                <i class="fa-solid fa-user-circle"></i> Profile
+            </a>
+        </div>
+
+        <div class="auth-buttons">
+            <a *ngIf="!isLoggedIn()" routerLink="/login" class="btn-login">Sign in</a>
+            <a *ngIf="isLoggedIn()" (click)="logout()" class="btn-login" style="cursor: pointer;">Logout</a>
+        </div>
+    </div>
+</nav>

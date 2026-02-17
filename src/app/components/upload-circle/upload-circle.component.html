@@ -1,0 +1,10 @@
+<div class="upload-container" (click)="triggerUpload()" [class.hovering]="isHovering">
+    <div class="circle-outer">
+        <div class="circle-inner">
+            <i class="fa-solid fa-plus" *ngIf="!isHovering"></i>
+            <i class="fa-solid fa-arrow-up" *ngIf="isHovering"></i>
+            <span class="label">Start</span>
+        </div>
+    </div>
+    <input type="file" #fileInput hidden (change)="onFileSelected($event)" multiple>
+</div>
