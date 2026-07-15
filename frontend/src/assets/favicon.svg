@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Key/Shield Shape -->
+  <defs>
+    <style>
+      .purple { fill: #6c5ce7; }
+      .teal { fill: #00b894; }
+    </style>
+  </defs>
+  
+  <!-- Left Half (Teal) -->
+  <path class="teal" d="M256 32 L64 96 V288 C64 436 256 512 256 512 V32 Z"/>
+  
+  <!-- Right Half (Purple) -->
+  <path class="purple" d="M256 32 L448 96 V288 C448 436 256 512 256 512 V32 Z"/>
+</svg>

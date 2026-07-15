@@ -1,0 +1,23 @@
+<div class="modal-overlay" *ngIf="isVisible" (click)="onCancel()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="file-info">
+            <i class="fa-solid fa-file file-icon"></i>
+            <span class="file-name">{{ fileName }}</span>
+        </div>
+
+        <div class="receiver-input-section">
+            <input type="text" [(ngModel)]="receiverUsername" placeholder="Enter receiver username"
+                class="receiver-input" (keyup.enter)="onUpload()">
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn-upload" (click)="onUpload()" [disabled]="!receiverUsername.trim()">
+                <i class="fa-solid fa-upload"></i>
+                Upload
+            </button>
+            <button class="btn-cancel" (click)="onCancel()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

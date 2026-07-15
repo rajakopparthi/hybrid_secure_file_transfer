@@ -1,0 +1,98 @@
+<div class="profile-container">
+    <div class="profile-card glass-panel">
+        <div class="profile-header">
+            <div class="avatar">
+                <i class="fa-solid fa-user-circle"></i>
+            </div>
+            <h1>{{ username }}</h1>
+            <p class="email">{{ email }}</p>
+        </div>
+
+        <div class="profile-section">
+            <h2><i class="fa-solid fa-key"></i> Encryption Keys</h2>
+            <p class="section-subtitle">Your RSA-2048 key pair for secure file transfer</p>
+
+            <!-- Public Key -->
+            <div class="key-card">
+                <div class="key-header">
+                    <label>
+                        <i class="fa-solid fa-lock-open"></i>
+                        Public Key
+                    </label>
+                    <button class="btn-copy" (click)="copyToClipboard(publicKey, 'Public key')">
+                        <i class="fa-solid fa-copy"></i>
+                        Copy
+                    </button>
+                </div>
+                <div class="key-content">
+                    <code>{{ publicKey }}</code>
+                </div>
+                <p class="key-info">
+                    <i class="fa-solid fa-info-circle"></i>
+                    Others use this to encrypt files for you
+                </p>
+            </div>
+
+            <!-- Private Key -->
+            <div class="key-card private-key-card">
+                <div class="key-header">
+                    <label>
+                        <i class="fa-solid fa-key"></i>
+                        Private Key
+                    </label>
+                    <div class="key-actions">
+                        <button class="btn-toggle" (click)="togglePrivateKeyVisibility()">
+                            <i class="fa-solid" [class.fa-eye]="!showPrivateKey"
+                                [class.fa-eye-slash]="showPrivateKey"></i>
+                            {{ showPrivateKey ? 'Hide' : 'Show' }}
+                        </button>
+                        <button class="btn-copy" (click)="copyPrivateKey()">
+                            <i class="fa-solid fa-copy"></i>
+                            Copy
+                        </button>
+                        <button class="btn-download" (click)="downloadPrivateKey()">
+                            <i class="fa-solid fa-download"></i>
+                            Download
+                        </button>
+                    </div>
+                </div>
+                <div class="key-content" *ngIf="showPrivateKey">
+                    <code>{{ privateKey }}</code>
+                </div>
+                <div class="key-content masked" *ngIf="!showPrivateKey">
+                    <code>●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●</code>
+                </div>
+                <div class="warning-box">
+                    <i class="fa-solid fa-exclamation-triangle"></i>
+                    <div>
+                        <strong>Keep this private!</strong>
+                        <p>Never share your private key. You need it to decrypt files sent to you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Password Verification Modal -->
+<div class="modal-overlay" *ngIf="showPasswordModal">
+    <div class="modal-card glass-panel">
+        <div class="modal-header">
+            <h3><i class="fa-solid fa-lock"></i> Verify Identity</h3>
+            <button class="btn-close" (click)="closePasswordModal()"><i class="fa-solid fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+            <p>Please enter your password to access your Private Key.</p>
+            <div class="form-group">
+                <input type="password" [(ngModel)]="passwordInput" placeholder="Enter your password"
+                    (keyup.enter)="verifyPassword()" autofocus>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" (click)="closePasswordModal()">Cancel</button>
+                <button class="btn-verify" (click)="verifyPassword()" [disabled]="!passwordInput || verifyLoading">
+                    {{ verifyLoading ? 'Verifying...' : 'Verify' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

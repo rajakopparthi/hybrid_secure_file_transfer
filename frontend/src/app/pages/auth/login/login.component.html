@@ -1,0 +1,33 @@
+<div class="auth-container">
+    <div class="card glass-panel">
+        <h2>Welcome Back</h2>
+
+        <div class="alert-error" *ngIf="errorMessage">
+            {{ errorMessage }}
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" formControlName="username" placeholder="Enter your username">
+                <div class="error" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+                    Username is required
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" formControlName="password" placeholder="Enter your password">
+                <div class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+                    Password is required
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary" [disabled]="loginForm.invalid">Sign In</button>
+
+            <div class="footer-link">
+                Don't have an account? <a routerLink="/register">Sign up</a>
+            </div>
+        </form>
+    </div>
+</div>

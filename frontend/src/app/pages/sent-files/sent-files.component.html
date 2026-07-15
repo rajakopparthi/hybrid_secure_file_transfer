@@ -1,0 +1,42 @@
+<div class="sent-files-container">
+    <div class="page-header glass-panel">
+        <h1><i class="fa-solid fa-paper-plane"></i> Sent Files</h1>
+        <p class="subtitle">Files you've securely shared with others</p>
+    </div>
+
+    <div class="files-grid" *ngIf="!isLoading && sentFiles.length > 0">
+        <div class="file-card glass-panel" *ngFor="let file of sentFiles">
+            <div class="file-icon">
+                <i class="fa-solid fa-file-shield"></i>
+            </div>
+            <div class="file-info">
+                <h3 class="file-name">{{ file.fileName }}</h3>
+                <div class="file-meta">
+                    <span class="meta-item">
+                        <i class="fa-solid fa-user"></i>
+                        To: {{ file.receiverUsername }}
+                    </span>
+                    <span class="meta-item">
+                        <i class="fa-solid fa-clock"></i>
+                        {{ formatDate(file.createdAt) }}
+                    </span>
+                </div>
+                <div class="security-badges">
+                    <span class="badge encrypted"><i class="fa-solid fa-lock"></i> AES-256</span>
+                    <span class="badge signed"><i class="fa-solid fa-signature"></i> Signed</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="empty-state" *ngIf="!isLoading && sentFiles.length === 0">
+        <i class="fa-solid fa-inbox"></i>
+        <h2>No sent files yet</h2>
+        <p>Files you upload will appear here</p>
+    </div>
+
+    <div class="loading-state" *ngIf="isLoading">
+        <div class="spinner"></div>
+        <p>Loading sent files...</p>
+    </div>
+</div>
